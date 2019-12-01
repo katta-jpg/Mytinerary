@@ -1,0 +1,4 @@
+    {
+        "MongoURI":"mongodb+srv://kattq:kattadatabase@cooldatabase-0y1fq.mongodb.net/MyTinerary?retryWrites=true&w=majority",
+        "JWTsecret":"TokenKatta26"
+    }
