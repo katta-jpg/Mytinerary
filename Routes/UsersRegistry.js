@@ -5,11 +5,17 @@ const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
 
-
 router.post("/", async (req, res) => {
-  const { name, email, password, user_img, country } = req.body;
+  const {
+    firstname,
+    lastname,
+    email,
+    password,
+    profilePic,
+    country
+  } = req.body;
 
-  if (!name || !email || !password) {
+  if (!firstname || !lastname || !country || !email || !password) {
     return res.status(400).json({ msg: "Enter the Required Fields" });
   }
 
@@ -17,10 +23,11 @@ router.post("/", async (req, res) => {
   if (oldUser) return res.status(400).json({ msg: "User Already Exist" });
 
   const newUser = new UserSchema({
-    name,
+    firstname,
+    lastname,
     email,
     password,
-    user_img,
+    profilePic,
     country
   });
 
@@ -30,21 +37,18 @@ router.post("/", async (req, res) => {
       newUser.password = hash;
       await UserSchema.create(newUser);
 
-        jwt.sign(
-            { id: newUser.id },
-            config.get("JWTsecret"),
-            { expiresIn: 3600*24 },
-            (err,token) => {
-                if(err) throw err;
-                res.json({
-                    token,
-                    name,
-                    email,
-                    user_img,
-                    country
-            }
-        )
-      });
+      jwt.sign(
+        { id: newUser.id },
+        config.get("JWTsecret"),
+        { expiresIn: 3600 * 24 },
+        (err, token) => {
+          if (err) throw err;
+          res.json({
+            token,
+            user: { firstname, lastname, email, profilePic, country }
+          });
+        }
+      );
     });
   });
 });
