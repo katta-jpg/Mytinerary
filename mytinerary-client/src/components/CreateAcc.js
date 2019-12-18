@@ -29,6 +29,7 @@ class CreateAcc extends Component {
       checkBox: false
     };
   }
+
   static propTypes = {
     isAuth: PropTypes.bool,
     error: PropTypes.object.isRequired,
@@ -94,7 +95,7 @@ class CreateAcc extends Component {
         country
       };
 
-      this.props.register(newUser);
+      this.props.register(newUser, this.props);
       this.props.clearErrors();
     } else {
       this.setState({ msg: "Accept our Terms and Conditions!" });
@@ -206,7 +207,7 @@ class CreateAcc extends Component {
             </Label>
           </Col>
           <FormGroup className="ml-5">
-            <Button className="ml-5 w-50 btn-danger">Submit</Button>
+            <Button className="ml-5 w-50 btn-info">Submit</Button>
           </FormGroup>
         </Form>
       </Container>

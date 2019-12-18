@@ -7,7 +7,7 @@ class Navbar extends Component {
     return (
       <div className="container-fluid p-0 m-0">
         <nav
-          className="navbar navbar-expand-xl bg-danger navbar-dark py-0"
+          className="navbar navbar-expand-xl bg-info navbar-dark py-0"
           height="20px"
         >
           <Avatar />

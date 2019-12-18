@@ -11,14 +11,16 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
 
+//passport configuration
+require("./passport")(passport);
+
 //passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-//passport configuration
-require("./passport");
 
 app.use("/api/cities", require("./routes/Cities"));
 app.use("/activities", require("./routes/Activities"));
+app.use("/api/auth/google", require("./routes/Google"));
 app.use("/api/registry", require("./Routes/UsersRegistry"));
 app.use("/itinerary", require("./routes/Itinerarys"));
 app.use("/api/login", require("./Routes/UserLogin"));

@@ -10,8 +10,7 @@ router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    UserSchema
-      .findById(req.user.id)
+    UserSchema.findById(req.user.id)
       .then(user => {
         res.json(user);
       })
@@ -21,7 +20,6 @@ router.get(
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-
   if (!email || !password) {
     return res.status(400).json({ msg: "Enter the Required Fields" });
   }
@@ -29,8 +27,9 @@ router.post("/", async (req, res) => {
   const oldUser = await UserSchema.findOne({ email });
   if (!oldUser) return res.status(400).json({ msg: "User does NOT exist." });
 
-  const isMatch = await bcrypt.compare(password, oldUser.password)
-  if (!isMatch) return res.status(400).json({ msg: "Credentials are NOT valid." });
+  const isMatch = await bcrypt.compare(password, oldUser.password);
+  if (!isMatch)
+    return res.status(400).json({ msg: "Credentials are NOT valid." });
 
   jwt.sign(
     { id: oldUser.id },
@@ -40,13 +39,14 @@ router.post("/", async (req, res) => {
       if (err) throw err;
       res.json({
         token,
-        user:
-        {
+        user: {
           name: oldUser.name,
-          email: oldUser.email
+          email: oldUser.email,
+          profilePic: oldUser.profilePic
         }
-      })
-    });
+      });
+    }
+  );
 });
 
 module.exports = router;

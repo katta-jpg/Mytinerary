@@ -1,33 +1,29 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FaRegUserCircle, FaReact } from "react-icons/fa";
+import { connect } from "react-redux";
+import { logout } from "../actions/authActions";
 
 class Avatar extends Component {
-  constructor(props) {
-    super(props);
-    this.LoginClick = this.LoginClick.bind(this);
-    this.LogoutClick = this.LogoutClick.bind(this);
-    this.state = { isLoggedIn: false };
-  }
-  LoginClick() {
-    this.setState({ isLoggedIn: true });
-  }
-  LogoutClick() {
-    this.setState({ isLoggedIn: false });
-  }
   render() {
-    const isLoggedIn = this.state.isLoggedIn;
+    const isLoggedIn = this.props.isAuth;
     return (
       <div>
         {isLoggedIn ? (
           <div className="dropdown">
-            <FaReact
-              className="navbar-brand dropdown-toggle"
+            <img
+              src={this.props.user.profilePic}
+              alt="profilePic"
+              className="navbar-brand dropdown-toggle rounded-circle "
               style={{ height: "50px", width: "50px" }}
               data-toggle="dropdown"
             />
             <div className="dropdown-menu">
-              <Link to="/" className="dropdown-item" onClick={this.LogoutClick}>
+              <Link
+                to="/"
+                className="dropdown-item"
+                onClick={this.props.logout}
+              >
                 Log Out
               </Link>
             </div>
@@ -44,11 +40,7 @@ class Avatar extends Component {
               data-toggle="collapse"
               data-target=".navbar-collapse.show"
             >
-              <Link
-                to="/login"
-                className="dropdown-item"
-                onClick={this.LoginClick}
-              >
+              <Link to="/login" className="dropdown-item">
                 Log In
               </Link>
               <Link to="/createAcc" className="dropdown-item">
@@ -61,4 +53,11 @@ class Avatar extends Component {
     );
   }
 }
-export default Avatar;
+
+const mapStateToProps = reducers => {
+  return reducers.authReducer;
+};
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Avatar);

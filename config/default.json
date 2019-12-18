@@ -1,5 +1,6 @@
 {
   "MongoURI": "mongodb+srv://kattq:kattadatabase@cooldatabase-0y1fq.mongodb.net/MyTinerary?retryWrites=true&w=majority",
   "JWTsecret": "TokenKatta26",
-  "client_id": "1025422639309-7nld4gj3541f2fg9ffd9kfqrmbkulhps.apps.googleusercontent.com"
+  "client_id": "490627459653-6nrp2ocas8mpe0tjf6gnlc5oa1tcvvfc.apps.googleusercontent.com",
+  "googleSecret": "UDNJhleFxn7j8JralZFQxwDF"
 }

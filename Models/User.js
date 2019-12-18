@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
+  googleId: { type: String },
+  provider: { type: String },
   email: { type: String, required: true, unique: true },
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },

@@ -23,6 +23,7 @@ export const tokenConfig = getState => {
   if (token) {
     config.headers["Authorization"] = "bearer" + " " + token;
   }
+  return config;
 };
 
 export const loadUser = () => (dispatch, getState) => {
@@ -44,14 +45,48 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
-export const register = ({
-  firstname,
-  lastname,
-  password,
-  email,
-  profilePic,
-  country
-}) => dispatch => {
+export const logout = () => {
+  return {
+    type: LOGOUT_SUCCESS
+  };
+};
+
+export const login = ({ email, password }, props) => dispatch => {
+  const config = {
+    headers: {
+      "Content-type": "application/json"
+    }
+  };
+  const body = JSON.stringify({
+    email,
+    password
+  });
+  axios
+    .post("http://localhost:5000/api/login", body, config)
+    .then(res => {
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      });
+
+      setTimeout(() => {
+        props.history.push("/");
+      }, 300);
+    })
+    .catch(err => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
+      );
+      dispatch({
+        type: LOGIN_FAIL
+      });
+    });
+};
+
+export const register = (
+  { firstname, lastname, password, email, profilePic, country },
+  props
+) => dispatch => {
   const config = {
     headers: {
       "Content-type": "application/json"
@@ -67,12 +102,16 @@ export const register = ({
   });
   axios
     .post("http://localhost:5000/api/registry", body, config)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+
+      setTimeout(() => {
+        props.history.push("/");
+      }, 300);
+    })
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")

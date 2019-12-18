@@ -4,6 +4,7 @@ import Header from "./header";
 import { connect } from "react-redux";
 import { getCitys } from "../actions/cityFetch";
 import CityBanner from "./CityBanner";
+import Footer from "./footer";
 class Cities extends Component {
   constructor() {
     super();
@@ -72,6 +73,9 @@ class Cities extends Component {
         ) : (
           ""
         )}
+        <br></br>
+        <br></br>
+        <Footer />
       </div>
     );
   }

@@ -27,6 +27,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/loadwithgoogle/:token" component={Index} />
               <Route exact path="/createAcc" component={CreateAcc} />
               <Route exact path="/cities" component={Cities} />
               <Route exact path="/Itinerary/:city" component={itineraryPage} />
