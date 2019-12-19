@@ -20,10 +20,7 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div className="container-fluid p-0 m-0">
-            {/* Segundo Diseño */}
             <Navbar />
-            {/* Segundo Diseño */}
-
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/login" component={Login} />
@@ -32,7 +29,6 @@ class App extends Component {
               <Route exact path="/cities" component={Cities} />
               <Route exact path="/Itinerary/:city" component={itineraryPage} />
             </Switch>
-            {/*  <Footer /> */}
           </div>
         </BrowserRouter>
       </Provider>
