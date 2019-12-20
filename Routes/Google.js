@@ -18,9 +18,9 @@ router.get(
     session: false
   }),
   async (req, res) => {
-    const { _id, firstname, lastname, email, profilePic } = req.user;
+    const { googleId, firstname, lastname, email, profilePic } = req.user;
     const payload = {
-      _id
+      googleId
     };
     jwt.sign(payload, config.get("JWTsecret"), (err, token) => {
       if (err) throw err;

@@ -6,7 +6,8 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  GOOGLE_SUCCESS
 } from "../actions/TypesAuth";
 
 const initialState = {
@@ -51,6 +52,13 @@ export default function(state = initialState, action) {
         isLoading: false,
         user: null
       };
+
+    case GOOGLE_SUCCESS:
+      return {
+        ...state,
+        token: action.payload
+      };
+
     default:
       return state;
   }

@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import CreateAcc from "./components/CreateAcc";
 import Cities from "./components/Cities";
 import Navbar from "./components/Navbar";
+import Loader from "./components/googleLoader";
 import itineraryPage from "./components/ItineraryPage";
 import { loadUser } from "./actions/authActions";
 
@@ -24,7 +25,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/loadwithgoogle/:token" component={Index} />
+              <Route exact path="/loadwithgoogle/:token" component={Loader} />
               <Route exact path="/createAcc" component={CreateAcc} />
               <Route exact path="/cities" component={Cities} />
               <Route exact path="/Itinerary/:city" component={itineraryPage} />

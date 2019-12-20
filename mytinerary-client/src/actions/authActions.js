@@ -9,7 +9,8 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  GOOGLE_SUCCESS
 } from "./TypesAuth";
 
 export const tokenConfig = getState => {
@@ -81,6 +82,13 @@ export const login = ({ email, password }, props) => dispatch => {
         type: LOGIN_FAIL
       });
     });
+};
+
+export const googleSuccess = token => dispatch => {
+  return dispatch({
+    type: GOOGLE_SUCCESS,
+    payload: token
+  });
 };
 
 export const register = (
